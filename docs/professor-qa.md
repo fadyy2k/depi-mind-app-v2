@@ -271,3 +271,69 @@ The frontend pod terminated. ArgoCD detected the drift, restored the deployment 
 | **Testing** | None in pipeline | Unit + integration tests |
 | **SBOM** | None | Syft SBOM per image |
 | **Runtime security** | None | Falco |
+
+---
+
+## Monitoring and Observability Questions
+
+### Did you add monitoring to the project?
+
+Yes. I added a monitoring layer using Prometheus and Grafana inside the K3s cluster on EC2 #2.
+
+The monitoring stack runs in a dedicated `monitoring` namespace and includes:
+
+- Prometheus
+- Grafana
+- Prometheus Operator
+- kube-state-metrics
+- node-exporter
+- Blackbox Exporter
+- A 5Gi Prometheus PVC
+
+Grafana is exposed for the demo on NodePort `30300`.
+
+### What does Prometheus monitor?
+
+Prometheus monitors Kubernetes runtime metrics including node CPU and memory, namespace metrics, pod metrics, Kubernetes object metrics, and the MIND API health endpoint.
+
+The MIND API health endpoint is monitored through Blackbox Exporter using this internal Kubernetes URL:
+
+```text
+http://mind-frontend-service.mind.svc.cluster.local/api/health
+```
+
+The Prometheus query used to verify application health is:
+
+```promql
+probe_success{job="probe/monitoring/mind-api-health"}
+```
+
+A value of `1` means the MIND API health endpoint is UP.
+
+### What does the custom Grafana dashboard show?
+
+I created a custom dashboard called **MIND App Monitoring**.
+
+It contains:
+
+| Panel | Purpose |
+|---|---|
+| MIND API Health | Shows whether the API health endpoint is UP or DOWN |
+| MIND API Response Time | Shows Blackbox probe response time |
+| MIND API Probe Status Over Time | Shows historical health status |
+
+This proves that the system is not only deployed, but also observable after deployment.
+
+### Why is monitoring important in DevSecOps?
+
+DevSecOps is not only about building and deploying safely. It also requires visibility after deployment.
+
+Prometheus and Grafana help answer:
+
+- Is the cluster healthy?
+- Are pods running correctly?
+- Is the node under pressure?
+- Is the application health endpoint responding?
+- Is the API response time stable?
+
+This makes the project closer to a production-ready delivery platform.

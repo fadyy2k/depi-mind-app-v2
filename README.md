@@ -23,6 +23,7 @@
 | Jenkins CI/CD | http://depi-jenkins-depi.duckdns.org:8080 | No login required |
 | ArgoCD GitOps | http://depi-k3s-depi.duckdns.org:32000 | Demo credentials — live demo only |
 | SonarQube | http://depi-jenkins-depi.duckdns.org:9000 | Demo credentials — live demo only |
+| Grafana Monitoring | http://depi-k3s-depi.duckdns.org:30300 | Demo credentials — live demo only |
 | DockerHub Backend | https://hub.docker.com/r/fadyy2k/mind-backend | Public |
 | DockerHub Frontend | https://hub.docker.com/r/fadyy2k/mind-frontend | Public |
 | MkDocs Documentation | https://fadyy2k.github.io/depi-mind-app-v2/ | Public |
@@ -119,6 +120,7 @@ Two AWS EC2 servers power this project:
 | K3s | Runtime | Lightweight Kubernetes cluster |
 | ArgoCD | GitOps | Declarative continuous deployment |
 | GitHub Actions | CI/CD | MkDocs + Showcase deployment |
+| Prometheus + Grafana | Monitoring | Kubernetes metrics, node metrics, and MIND API health dashboard |
 | MkDocs Material | Documentation | Project documentation portal |
 | React + Vite | Frontend | Visual showcase app |
 
@@ -247,7 +249,7 @@ For a production-grade deployment, the following enhancements are recommended:
 | TLS | HTTP only | HTTPS with cert-manager + Let's Encrypt |
 | Secrets | Jenkins creds | HashiCorp Vault or AWS Secrets Manager |
 | Kubernetes | K3s (single node) | Multi-node cluster or managed EKS/GKE |
-| Monitoring | None | Prometheus + Grafana |
+| Monitoring | Prometheus + Grafana added | Alerting + retention policy + secured access |
 | Alerting | None | PagerDuty / Slack notifications |
 | Image tags | Build number | Semantic versioning with Git SHA |
 
