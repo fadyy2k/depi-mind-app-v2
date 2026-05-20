@@ -39,6 +39,7 @@ namespace: argocd   # ArgoCD GitOps controller
 | kube-state-metrics | Exposes Kubernetes object metrics |
 | node-exporter | Exposes node CPU, memory, disk, and network metrics |
 | Blackbox Exporter | Probes the MIND API health endpoint |
+| Dozzle | Provides live Kubernetes pod/container logs |
 | Prometheus PVC | Stores Prometheus metrics data |
 
 ---
@@ -49,6 +50,7 @@ namespace: argocd   # ArgoCD GitOps controller
 |---|---|
 | Grafana | `http://depi-k3s-depi.duckdns.org:30300` |
 | MIND App Monitoring Dashboard | `http://depi-k3s-depi.duckdns.org:30300/d/mind-app-monitoring/mind-app-monitoring` |
+| Dozzle Live Logs | `http://depi-k3s-depi.duckdns.org:30301` |
 
 !!! warning "Security"
     Grafana is exposed using NodePort `30300` for demo purposes.

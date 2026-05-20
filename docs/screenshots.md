@@ -241,6 +241,21 @@ probe_success{job="probe/monitoring/mind-api-health"}
 
 **Evidence:** Prometheus is scraping the Blackbox Exporter probe and the MIND API health endpoint returns `probe_success = 1`.
 
+---
+
+## Dozzle — Kubernetes Live Logs
+
+![Dozzle Kubernetes Logs](screenshots/dozzle-kubernetes-logs.png)
+
+**What it shows:** Dozzle running in Kubernetes mode and showing live pod/container logs from the K3s cluster.
+
+**Evidence:**
+- Dozzle is deployed in the `monitoring` namespace
+- Dozzle is running in `k8s` mode
+- It can read Kubernetes pod logs through RBAC
+- It provides a simple live log viewer for the running application and cluster workloads
+
+
 ## Evidence Summary
 
 | # | Screenshot | Stage | Result |
@@ -264,3 +279,4 @@ probe_success{job="probe/monitoring/mind-api-health"}
 | 17 | `grafana-kubernetes-cluster.png` | Monitoring | Kubernetes metrics visible ✓ |
 | 18 | `grafana-mind-app-monitoring.png` | Monitoring | MIND API dashboard UP ✓ |
 | 19 | `grafana-prometheus-probe-success.png` | Monitoring | API health probe success ✓ |
+| 20 | `dozzle-kubernetes-logs.png` | Logs | Live Kubernetes logs visible ✓ |

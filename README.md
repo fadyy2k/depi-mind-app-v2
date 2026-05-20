@@ -24,6 +24,7 @@
 | ArgoCD GitOps | http://depi-k3s-depi.duckdns.org:32000 | Demo credentials — live demo only |
 | SonarQube | http://depi-jenkins-depi.duckdns.org:9000 | Demo credentials — live demo only |
 | Grafana Monitoring | http://depi-k3s-depi.duckdns.org:30300 | Demo credentials — live demo only |
+| Dozzle Live Logs | http://depi-k3s-depi.duckdns.org:30301 | Demo access — live Kubernetes logs |
 | DockerHub Backend | https://hub.docker.com/r/fadyy2k/mind-backend | Public |
 | DockerHub Frontend | https://hub.docker.com/r/fadyy2k/mind-frontend | Public |
 | MkDocs Documentation | https://fadyy2k.github.io/depi-mind-app-v2/ | Public |
@@ -121,6 +122,7 @@ Two AWS EC2 servers power this project:
 | ArgoCD | GitOps | Declarative continuous deployment |
 | GitHub Actions | CI/CD | MkDocs + Showcase deployment |
 | Prometheus + Grafana | Monitoring | Kubernetes metrics, node metrics, and MIND API health dashboard |
+| Dozzle | Logs | Live Kubernetes pod/container log viewer |
 | MkDocs Material | Documentation | Project documentation portal |
 | React + Vite | Frontend | Visual showcase app |
 

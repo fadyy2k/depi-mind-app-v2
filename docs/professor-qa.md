@@ -337,3 +337,22 @@ Prometheus and Grafana help answer:
 - Is the API response time stable?
 
 This makes the project closer to a production-ready delivery platform.
+
+### Did you add live log viewing?
+
+Yes. I added Dozzle as a lightweight live log viewer for the K3s cluster.
+
+Dozzle runs in Kubernetes mode inside the `monitoring` namespace and is exposed for the demo using NodePort `30301`.
+
+It complements Prometheus and Grafana:
+
+| Tool | Purpose |
+|---|---|
+| Prometheus | Metrics collection |
+| Grafana | Metrics visualization |
+| Blackbox Exporter | API health probing |
+| Dozzle | Live Kubernetes pod/container logs |
+
+Dozzle helps inspect live pod logs from the browser without manually running `kubectl logs` for every pod.
+
+For production, access to Dozzle should be secured with authentication, HTTPS, and strict firewall rules.
