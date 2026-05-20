@@ -77,6 +77,7 @@ nav:
   - Architecture: architecture.md
   - CI/CD Pipeline: cicd.md
   - Security Scanning: security.md
+  - Monitoring: monitoring.md
   - Kubernetes: kubernetes.md
   - ArgoCD GitOps: argocd.md
   - Operations: operations.md
