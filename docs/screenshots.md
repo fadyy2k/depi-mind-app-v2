@@ -205,6 +205,42 @@ ArgoCD URL: [http://depi-k3s-depi.duckdns.org:32000](http://depi-k3s-depi.duckdn
 
 ---
 
+---
+
+## Grafana — Kubernetes Cluster Monitoring
+
+![Grafana Kubernetes Cluster](screenshots/grafana-kubernetes-cluster.png)
+
+**What it shows:** Grafana Kubernetes cluster dashboard with CPU, memory, namespace, and pod metrics.
+
+**Evidence:** Prometheus is collecting Kubernetes cluster metrics and Grafana is visualizing runtime health.
+
+---
+
+## Grafana — MIND App Monitoring Dashboard
+
+![Grafana MIND App Monitoring](screenshots/grafana-mind-app-monitoring.png)
+
+**What it shows:** Custom Grafana dashboard for the MIND Notes App.
+
+**Evidence:** The dashboard shows MIND API health as UP, API response time, and probe status over time.
+
+---
+
+## Grafana — Prometheus Probe Success
+
+![Grafana Prometheus Probe Success](screenshots/grafana-prometheus-probe-success.png)
+
+**What it shows:** Grafana Explore query for the MIND API health probe.
+
+**Query:**
+
+```promql
+probe_success{job="probe/monitoring/mind-api-health"}
+```
+
+**Evidence:** Prometheus is scraping the Blackbox Exporter probe and the MIND API health endpoint returns `probe_success = 1`.
+
 ## Evidence Summary
 
 | # | Screenshot | Stage | Result |
@@ -225,3 +261,6 @@ ArgoCD URL: [http://depi-k3s-depi.duckdns.org:32000](http://depi-k3s-depi.duckdn
 | 14 | `api-health.png` | Application | API healthy ✓ |
 | 15 | `argocd-synced.png` | GitOps | Synced + Healthy ✓ |
 | 16 | `argocd-self-heal.png` | GitOps | Self-healing proven ✓ |
+| 17 | `grafana-kubernetes-cluster.png` | Monitoring | Kubernetes metrics visible ✓ |
+| 18 | `grafana-mind-app-monitoring.png` | Monitoring | MIND API dashboard UP ✓ |
+| 19 | `grafana-prometheus-probe-success.png` | Monitoring | API health probe success ✓ |
