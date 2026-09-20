@@ -5,7 +5,6 @@ services:
       POSTGRES_DB: notes_app
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
-    ports:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
