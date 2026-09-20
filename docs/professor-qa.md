@@ -1,3 +1,5 @@
+> 🔐 Public documentation: operational endpoints and credentials are sanitized. Use authenticated values supplied out-of-band for a live environment.
+
 # Professor Q&A
 
 This section anticipates likely evaluation questions and provides complete, confident answers based on what was actually built and deployed.
@@ -135,7 +137,7 @@ In production, a private registry (AWS ECR, Google Artifact Registry, or self-ho
 
 ### What is the role of each EC2 server?
 
-**EC2 #1 (`depi-jenkins-server` — `depi-jenkins-depi.duckdns.org`)**
+**EC2 #1 (`depi-jenkins-server` — `ci-lab.internal.example`)**
 
 This is the CI/CD and security scanning server. It runs:
 - Jenkins (port 8080) — all pipeline stages
@@ -146,7 +148,7 @@ This is the CI/CD and security scanning server. It runs:
 
 Nothing from this server is exposed to users. It is purely a build and scan system.
 
-**EC2 #2 (`depi-k3s-server` — `depi-k3s-depi.duckdns.org`)**
+**EC2 #2 (`depi-k3s-server` — `k8s-lab.internal.example`)**
 
 This is the runtime and GitOps server. It runs:
 - K3s Kubernetes cluster — hosts the application
@@ -203,9 +205,9 @@ To deploy a new version: update the image tag in the manifest, commit to Git, an
 
 Three ways:
 
-1. **Browser** — Open [http://depi-k3s-depi.duckdns.org:30080](http://depi-k3s-depi.duckdns.org:30080) and log in with `demo@example.com` / `demo123456`
+1. **Browser** — Open [http://k8s-lab.internal.example:30080](http://k8s-lab.internal.example:30080) and log in with `<demo-user>` / `<configured-out-of-band>`
 
-2. **API health endpoint** — `curl http://depi-k3s-depi.duckdns.org:30080/api/health` returns:
+2. **API health endpoint** — `curl http://k8s-lab.internal.example:30080/api/health` returns:
    ```json
    {"message":"Notes API is running","status":"ok"}
    ```
