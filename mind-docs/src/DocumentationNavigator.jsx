@@ -8,16 +8,16 @@ import { FileText, Book, Server, Cloud, GitBranch, Shield, Wrench, AlertCircle, 
 // npm install react-markdown remark-gfm rehype-raw lucide-react
 
 const MarkdownComponents = {
-  h1: ({ node, ...props }) => (
+  h1: ({ node: _node, ...props }) => (
     <h1 className="text-3xl font-bold text-white mb-6" {...props} />
   ),
-  h2: ({ node, ...props }) => (
+  h2: ({ node: _node, ...props }) => (
     <h2 className="text-2xl font-bold text-white mt-8 mb-4" {...props} />
   ),
-  h3: ({ node, ...props }) => (
+  h3: ({ node: _node, ...props }) => (
     <h3 className="text-xl font-semibold text-white mt-6 mb-3" {...props} />
   ),
-  p: ({ node, ...props }) => (
+  p: ({ node: _node, ...props }) => (
     <p className="mb-4 leading-relaxed text-slate-300" {...props} />
   ),
   a: ({ href, children, ...props }) => (
@@ -42,39 +42,34 @@ const MarkdownComponents = {
       </pre>
     );
   },
-  ul: ({ node, ...props }) => (
+  ul: ({ node: _node, ...props }) => (
     <ul className="ml-6 list-disc space-y-2 text-slate-300" {...props} />
   ),
-  ol: ({ node, ...props }) => (
+  ol: ({ node: _node, ...props }) => (
     <ol className="ml-6 list-decimal space-y-2 text-slate-300" {...props} />
   ),
-  li: ({ node, ...props }) => <li className="mb-1" {...props} />,
-  blockquote: ({ node, ...props }) => (
+  li: ({ node: _node, ...props }) => <li className="mb-1" {...props} />,
+  blockquote: ({ node: _node, ...props }) => (
     <blockquote className="border-l-4 border-blue-500 pl-4 italic my-4 text-slate-400" {...props} />
   ),
-  hr: ({ node, ...props }) => <hr className="border-slate-700 my-6" {...props} />,
-  table: ({ node, ...props }) => (
+  hr: ({ node: _node, ...props }) => <hr className="border-slate-700 my-6" {...props} />,
+  table: ({ node: _node, ...props }) => (
     <div className="overflow-x-auto my-4">
       <table className="min-w-full table-auto border-collapse" {...props} />
     </div>
   ),
-  thead: ({ node, ...props }) => (
+  thead: ({ node: _node, ...props }) => (
     <thead className="bg-slate-800/40 text-slate-200 text-sm" {...props} />
   ),
-  tbody: ({ node, ...props }) => <tbody className="text-slate-300" {...props} />,
-  tr: ({ node, ...props }) => <tr className="border-t border-slate-700" {...props} />,
-  th: ({ node, ...props }) => (
+  tbody: ({ node: _node, ...props }) => <tbody className="text-slate-300" {...props} />,
+  tr: ({ node: _node, ...props }) => <tr className="border-t border-slate-700" {...props} />,
+  th: ({ node: _node, ...props }) => (
     <th className="px-4 py-2 text-left font-semibold" {...props} />
   ),
-  td: ({ node, ...props }) => <td className="px-4 py-2 align-top" {...props} />,
+  td: ({ node: _node, ...props }) => <td className="px-4 py-2 align-top" {...props} />,
 };
 
-const DocumentationNavigator = () => {
-  const [selectedDoc, setSelectedDoc] = useState('overview');
-  const [content, setContent] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const documents = [
+const DOCUMENTS = [
     {
       id: 'overview',
       title: '01. Project Overview',
@@ -141,10 +136,17 @@ const DocumentationNavigator = () => {
     }
   ];
 
+const DocumentationNavigator = () => {
+  const [selectedDoc, setSelectedDoc] = useState('overview');
+  const [content, setContent] = useState('');
+  const [loading, setLoading] = useState(false);
+
+
+
   useEffect(() => {
     const loadContent = async () => {
       setLoading(true);
-      const doc = documents.find(d => d.id === selectedDoc);
+      const doc = DOCUMENTS.find(d => d.id === selectedDoc);
 
       try {
         // Try to load from public/docs (create public/docs and place files there)
@@ -155,7 +157,7 @@ const DocumentationNavigator = () => {
         } else {
           // fallback markdown that renders nicely using react-markdown
           setContent(
-`# ${doc.title}\n\n**Documentation file not found locally.**\n\n---\n\nTo view this document:\n\n1. Create a \`public/docs/\` folder in your project root.\n2. Save the markdown files in that folder (filename: \`${doc.filename}\`).\n3. Reload this page.\n\nAlternatively, click \"View on GitHub\" to open the file in the repository.`
+`# ${doc.title}\n\n**Documentation file not found locally.**\n\n---\n\nTo view this document:\n\n1. Create a \`public/docs/\` folder in your project root.\n2. Save the markdown files in that folder (filename: \`${doc.filename}\`).\n3. Reload this page.\n\nAlternatively, click "View on GitHub" to open the file in the repository.`
           );
         }
       } catch (error) {
@@ -168,7 +170,7 @@ const DocumentationNavigator = () => {
     loadContent();
   }, [selectedDoc]);
 
-  const currentDoc = documents.find(d => d.id === selectedDoc);
+  const currentDoc = DOCUMENTS.find(d => d.id === selectedDoc);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8">
@@ -189,7 +191,7 @@ const DocumentationNavigator = () => {
               <h2 className="text-2xl font-semibold text-white">Documentation Index</h2>
             </div>
 
-            {documents.map((doc) => {
+            {DOCUMENTS.map((doc) => {
               const Icon = doc.icon;
               return (
                 <button
@@ -222,7 +224,7 @@ const DocumentationNavigator = () => {
             {/* Action Buttons */}
             <div className="mt-8 space-y-3">
               <a
-                href={`https://github.com/who-sam/MIND/blob/main/${currentDoc.githubPath}`}
+                href={`https://github.com/fadyy2k/depi-mind-app-v2/blob/main/MIND/${currentDoc.githubPath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 w-full px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
