@@ -44,6 +44,47 @@ Every stage is triggered automatically from a **GitHub push** through **Jenkins*
 
 ---
 
+## Architecture at a Glance
+
+```mermaid
+flowchart LR
+    DEV[Developer] --> GH[GitHub]
+    GH --> CI[Jenkins CI]
+    CI --> GL[Gitleaks]
+    CI --> SQ[SonarQube]
+    CI --> BUILD[Docker Build]
+    BUILD --> TR[Trivy]
+    TR --> REG[DockerHub]
+
+    GH --> GITOPS[GitOps manifests]
+    GITOPS --> ARGO[ArgoCD]
+    ARGO --> K3S[K3s Cluster]
+    REG -. image pull .-> K3S
+
+    K3S --> FE[React / Nginx]
+    K3S --> API[Go API]
+    API --> DB[(PostgreSQL)]
+    K3S --> OBS[Prometheus / Grafana]
+```
+
+## What I Built
+
+- CI pipeline with secret scanning, static analysis, image build, vulnerability scanning, and registry publishing.
+- GitOps deployment with ArgoCD and a Kubernetes desired-state workflow.
+- Application stack split into React/Nginx frontend, Go API, and PostgreSQL.
+- Monitoring and logging layers documented separately from the public operational endpoints.
+- Public documentation and showcase automation through GitHub Actions / GitHub Pages.
+
+## Engineering Decisions
+
+- **Git as desired state:** cluster changes are driven from version-controlled manifests rather than undocumented manual changes.
+- **Security before deployment:** repository, code, and container checks are part of the delivery path instead of an afterthought.
+- **Public evidence, private control plane:** architecture and implementation are public; administrative endpoints and credentials are intentionally excluded.
+- **Recovery matters:** self-healing, health checks, persistent storage, and rollback considerations are documented alongside deployment.
+- **Lab vs production is explicit:** the repository demonstrates the pattern while the production-improvement section calls out the gaps that remain.
+
+---
+
 ## Full Pipeline Flow
 
 ```
