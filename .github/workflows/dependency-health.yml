@@ -1,0 +1,67 @@
+name: Dependency Health
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "MIND/**"
+      - "mind-docs/**"
+      - "showcase/**"
+      - ".github/workflows/dependency-health.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "MIND/**"
+      - "mind-docs/**"
+      - "showcase/**"
+      - ".github/workflows/dependency-health.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  npm-audit-build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        directory: [MIND/frontend, mind-docs, showcase]
+    defaults:
+      run:
+        working-directory: ${{ matrix.directory }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - name: Setup Node
+        uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: ${{ matrix.directory }}/package-lock.json
+      - name: Clean install
+        run: npm ci --ignore-scripts
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+      - name: Build
+        run: npm run build
+
+  go-vulnerability-scan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: MIND/backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+      - name: Setup Go
+        uses: actions/setup-go@v7.0.0
+        with:
+          go-version: "1.25.x"
+          cache-dependency-path: MIND/backend/go.sum
+      - name: Test
+        run: go test ./...
+      - name: Install govulncheck
+        run: go install golang.org/x/vuln/cmd/govulncheck@latest
+      - name: Scan reachable Go vulnerabilities
+        run: govulncheck ./...
