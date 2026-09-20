@@ -6,11 +6,11 @@ const LINKS = {
   github: "https://github.com/fadyy2k/depi-mind-app-v2",
   docs: "https://fadyy2k.github.io/depi-mind-app-v2/",
   showcase: "https://fadyy2k.github.io/depi-mind-app-v2/showcase/",
-  jenkins: "http://depi-jenkins-depi.duckdns.org:8080",
-  app: "http://depi-k3s-depi.duckdns.org:30080",
-  health: "http://depi-k3s-depi.duckdns.org:30080/api/health",
-  argocd: "http://depi-k3s-depi.duckdns.org:32000",
-  sonarqube: "http://depi-jenkins-depi.duckdns.org:9000",
+  jenkins: "https://fadyy2k.github.io/depi-mind-app-v2/cicd/",
+  app: "https://fadyy2k.github.io/depi-mind-app-v2/showcase/",
+  health: "https://fadyy2k.github.io/depi-mind-app-v2/operations/",
+  argocd: "https://fadyy2k.github.io/depi-mind-app-v2/argocd/",
+  sonarqube: "https://fadyy2k.github.io/depi-mind-app-v2/security/",
   dockerBackend: "https://hub.docker.com/r/fadyy2k/mind-backend",
   dockerFrontend: "https://hub.docker.com/r/fadyy2k/mind-frontend",
 };
@@ -29,7 +29,7 @@ const PIPELINE_STAGES = [
 const EC2_SERVERS = [
   {
     name: "EC2 #1 — CI/CD Server",
-    hostname: "depi-jenkins-depi.duckdns.org",
+    hostname: "Sanitized CI/CD host",
     color: "#3b82f6",
     icon: "🖥️",
     summary: "Builds, scans, packages, and publishes images.",
@@ -43,7 +43,7 @@ const EC2_SERVERS = [
   },
   {
     name: "EC2 #2 — Kubernetes Server",
-    hostname: "depi-k3s-depi.duckdns.org",
+    hostname: "Sanitized Kubernetes host",
     color: "#10b981",
     icon: "☸️",
     summary: "Runs the app, database, ArgoCD, and Kubernetes workloads.",

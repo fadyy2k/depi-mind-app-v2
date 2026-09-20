@@ -1,3 +1,5 @@
+> 🔐 Public documentation: operational endpoints and credentials are sanitized. Use authenticated values supplied out-of-band for a live environment.
+
 # ArgoCD GitOps
 
 ArgoCD is the GitOps controller for this project. It watches the GitHub repository and automatically synchronizes the desired state defined in `k8s/` manifests into the K3s Kubernetes cluster.
@@ -21,7 +23,7 @@ This means: to deploy a new version, you update a manifest in Git. ArgoCD does t
 
 | Field | Value |
 |---|---|
-| URL | [http://depi-k3s-depi.duckdns.org:32000](http://depi-k3s-depi.duckdns.org:32000) |
+| URL | [http://k8s-lab.internal.example:32000](http://k8s-lab.internal.example:32000) |
 | Credentials | Demo credentials — live demo only |
 | Application name | `mind-app` |
 

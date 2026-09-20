@@ -1,3 +1,5 @@
+> 🔐 Public documentation: operational endpoints and credentials are sanitized. Use authenticated values supplied out-of-band for a live environment.
+
 # Operations
 
 This page covers day-to-day operational tasks: validation commands, deployment verification, troubleshooting, and how the documentation and showcase are deployed.
@@ -11,7 +13,7 @@ Run these checks to confirm the full stack is healthy:
 ### 1. API Health
 
 ```bash
-curl http://depi-k3s-depi.duckdns.org:30080/api/health
+curl http://k8s-lab.internal.example:30080/api/health
 ```
 
 **Expected response:**
@@ -104,7 +106,7 @@ argocd app sync mind-app
 
 ### Trigger a Pipeline Run
 
-Navigate to: [http://depi-jenkins-depi.duckdns.org:8080](http://depi-jenkins-depi.duckdns.org:8080)
+Navigate to: [http://ci-lab.internal.example:8080](http://ci-lab.internal.example:8080)
 
 Click the pipeline job → **Build Now**
 

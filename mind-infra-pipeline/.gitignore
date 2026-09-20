@@ -2,3 +2,10 @@
 # .tfstate files
 *.tfstate
 *.tfstate.
+
+# Local variable and secret files
+*.tfvars
+!*.tfvars.example
+.env
+.env.*
+!.env.example

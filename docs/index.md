@@ -30,11 +30,11 @@ Every stage is automated, logged, and evidenced with screenshots.
 
 | Resource | URL | Credentials |
 |---|---|---|
-| MIND Notes App | [http://depi-k3s-depi.duckdns.org:30080](http://depi-k3s-depi.duckdns.org:30080) | `demo@example.com` / `demo123456` |
-| API Health | [http://depi-k3s-depi.duckdns.org:30080/api/health](http://depi-k3s-depi.duckdns.org:30080/api/health) | Public |
-| Jenkins | [http://depi-jenkins-depi.duckdns.org:8080](http://depi-jenkins-depi.duckdns.org:8080) | No login required |
-| ArgoCD | [http://depi-k3s-depi.duckdns.org:32000](http://depi-k3s-depi.duckdns.org:32000) | Demo credentials — live demo only |
-| SonarQube | [http://depi-jenkins-depi.duckdns.org:9000](http://depi-jenkins-depi.duckdns.org:9000) | Demo credentials — live demo only |
+| MIND Notes App | [https://fadyy2k.github.io/depi-mind-app-v2/showcase/](https://fadyy2k.github.io/depi-mind-app-v2/showcase/) | `<demo-user>` / `<configured-out-of-band>` |
+| API Health | [https://fadyy2k.github.io/depi-mind-app-v2/operations/](https://fadyy2k.github.io/depi-mind-app-v2/operations/) | Public |
+| Jenkins | [https://fadyy2k.github.io/depi-mind-app-v2/cicd/](https://fadyy2k.github.io/depi-mind-app-v2/cicd/) | Authentication required |
+| ArgoCD | [https://fadyy2k.github.io/depi-mind-app-v2/argocd/](https://fadyy2k.github.io/depi-mind-app-v2/argocd/) | Authentication required |
+| SonarQube | [https://fadyy2k.github.io/depi-mind-app-v2/security/](https://fadyy2k.github.io/depi-mind-app-v2/security/) | Authentication required |
 | DockerHub (backend) | [fadyy2k/mind-backend](https://hub.docker.com/r/fadyy2k/mind-backend) | Public |
 | DockerHub (frontend) | [fadyy2k/mind-frontend](https://hub.docker.com/r/fadyy2k/mind-frontend) | Public |
 
@@ -82,7 +82,7 @@ flowchart LR
 Two AWS EC2 instances power this project:
 
 === "EC2 #1 — CI/CD Server"
-    **Hostname:** `depi-jenkins-depi.duckdns.org`
+    **Hostname:** `ci-lab.internal.example`
 
     - Jenkins (port 8080)
     - SonarQube (port 9000)
@@ -91,7 +91,7 @@ Two AWS EC2 instances power this project:
     - Trivy
 
 === "EC2 #2 — Kubernetes Server"
-    **Hostname:** `depi-k3s-depi.duckdns.org`
+    **Hostname:** `k8s-lab.internal.example`
 
     - K3s Kubernetes Cluster
     - ArgoCD (port 32000)

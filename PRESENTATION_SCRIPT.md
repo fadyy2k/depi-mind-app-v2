@@ -1,3 +1,5 @@
+> 🔐 Public script: live operational endpoints and demo credentials have been removed. Use authenticated links shared privately during a live demonstration.
+
 # Final Professor Presentation Script
 
 ## Total time: ~12-15 minutes
@@ -18,7 +20,7 @@
 
 ## 2. Open Jenkins (2 min)
 
-**Navigate to:** `http://depi-jenkins-depi.duckdns.org:8080`
+**Navigate to:** the authenticated Jenkins endpoint (shared out-of-band)
 
 **Say:**
 
@@ -46,7 +48,7 @@
 
 ## 3. Open SonarQube (1 min)
 
-**Navigate to:** `http://depi-jenkins-depi.duckdns.org:9000`
+**Navigate to:** the authenticated SonarQube endpoint (shared out-of-band)
 
 **Say:**
 
@@ -66,15 +68,15 @@
 
 ## 5. Show the App Running (1 min)
 
-**Navigate to:** `http://depi-k3s-depi.duckdns.org:30080`
+**Navigate to:** `https://fadyy2k.github.io/depi-mind-app-v2/showcase/`
 
 **Say:**
 
-> "This is the MIND Notes App running live in Kubernetes. Let me log in — `demo@example.com`, `demo123456`."
+> "This is the MIND Notes App running live in Kubernetes. Let me log in — `<demo-user>`, `<configured-out-of-band>`."
 
 **Log in and show the notes interface.**
 
-**Navigate to:** `http://depi-k3s-depi.duckdns.org:30080/api/health`
+**Navigate to:** `https://fadyy2k.github.io/depi-mind-app-v2/operations/`
 
 **Say:**
 
@@ -84,7 +86,7 @@
 
 ## 6. Open ArgoCD (2 min)
 
-**Navigate to:** `http://depi-k3s-depi.duckdns.org:32000`
+**Navigate to:** the authenticated ArgoCD endpoint (shared out-of-band)
 
 **Log in with demo credentials.**
 
@@ -179,12 +181,12 @@ kubectl get application mind-app -n argocd
 | Tab | URL |
 |---|---|
 | GitHub | https://github.com/fadyy2k/depi-mind-app-v2 |
-| Jenkins Build #8 Console | http://depi-jenkins-depi.duckdns.org:8080 |
-| SonarQube | http://depi-jenkins-depi.duckdns.org:9000 |
+| Jenkins Build #8 Console | https://fadyy2k.github.io/depi-mind-app-v2/cicd/ |
+| SonarQube | https://fadyy2k.github.io/depi-mind-app-v2/security/ |
 | DockerHub | https://hub.docker.com/r/fadyy2k/mind-backend |
-| MIND App | http://depi-k3s-depi.duckdns.org:30080 |
-| API Health | http://depi-k3s-depi.duckdns.org:30080/api/health |
-| ArgoCD | http://depi-k3s-depi.duckdns.org:32000 |
+| MIND App | https://fadyy2k.github.io/depi-mind-app-v2/showcase/ |
+| API Health | https://fadyy2k.github.io/depi-mind-app-v2/operations/ |
+| ArgoCD | https://fadyy2k.github.io/depi-mind-app-v2/argocd/ |
 | Documentation | https://fadyy2k.github.io/depi-mind-app-v2/ |
 | Showcase | https://fadyy2k.github.io/depi-mind-app-v2/showcase/ |
 
@@ -204,5 +206,5 @@ kubectl get pods -n mind -w
 kubectl get application mind-app -n argocd
 
 # API health check
-curl http://depi-k3s-depi.duckdns.org:30080/api/health
+curl https://fadyy2k.github.io/depi-mind-app-v2/operations/
 ```

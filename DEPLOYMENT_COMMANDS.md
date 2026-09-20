@@ -1,215 +1,98 @@
 # Deployment Commands Reference
 
-## Local Build and Push Workflow
+> 🔐 **Public / sanitized reference.** Operational hostnames, IP addresses, credentials, and tokens are intentionally omitted. Use environment variables or your secret manager for real values.
 
-### 1. Clone the repository
+## Local Development
 
 ```bash
 git clone https://github.com/fadyy2k/depi-mind-app-v2.git
 cd depi-mind-app-v2
 ```
 
-### 2. Make changes
-
-Edit documentation, manifests, or showcase as needed.
-
-### 3. Check status
+### MkDocs
 
 ```bash
-git status
-git diff
-```
-
-### 4. Stage changes
-
-```bash
-# Stage all changes
-git add .
-
-# Or stage specific files
-git add docs/index.md docs/architecture.md
-git add showcase/src/App.jsx
-git add README.md
-```
-
-### 5. Commit
-
-```bash
-git commit -m "Update documentation and showcase"
-```
-
-### 6. Push to GitHub
-
-```bash
-git push origin main
-```
-
-### 7. Check GitHub Actions
-
-Navigate to: https://github.com/fadyy2k/depi-mind-app-v2/actions
-
-Wait for the workflow "Deploy MkDocs and Showcase to GitHub Pages" to complete.
-The workflow typically takes 2-3 minutes.
-
-### 8. Verify final URLs
-
-```bash
-# MkDocs documentation
-open https://fadyy2k.github.io/depi-mind-app-v2/
-
-# Visual showcase
-open https://fadyy2k.github.io/depi-mind-app-v2/showcase/
-```
-
----
-
-## Local MkDocs Development
-
-```bash
-# Install dependencies
 pip install mkdocs-material
-
-# Serve with hot reload
 mkdocs serve
-
-# Build static site
 mkdocs build
-# Output: site/
 ```
 
----
-
-## Local Showcase Development
+### Showcase
 
 ```bash
 cd showcase
-
-# Install dependencies
 npm install
-
-# Development server with hot reload
 npm run dev
-
-# Production build
 npm run build
-# Output: showcase/dist/
-
-# Preview production build
 npm run preview
 ```
 
-**Important:** The Vite base path in `vite.config.js` must be:
-```javascript
-base: '/depi-mind-app-v2/showcase/'
-```
+### Docker
 
-This is required for GitHub Pages subdirectory routing. Do not change this for local dev — use `npm run preview` to test the production build locally.
-
----
-
-## Manual Local Docker Build
+Create a local `.env` from `.env.example`, set a strong local-only database password, then:
 
 ```bash
-# Build backend
-docker build -t fadyy2k/mind-backend ./MIND/backend
-
-# Build frontend
-docker build -t fadyy2k/mind-frontend ./MIND/frontend
-
-# Run locally with Compose
-docker compose up
-
-# Run dev mode
-docker compose -f docker-compose.dev.yml up
+docker compose -f MIND/docker-compose.yml up --build
 ```
-
----
 
 ## Kubernetes Operations
 
+These commands assume authenticated access to the cluster. No public control-plane endpoint is documented here.
+
 ```bash
-# Check all resources
 kubectl get all -n mind
-
-# Check pods
 kubectl get pods -n mind -o wide
-
-# Check services
 kubectl get svc -n mind
-
-# Check PVC
 kubectl get pvc -n mind
-
-# Check ArgoCD application
 kubectl get application mind-app -n argocd
-
-# ArgoCD app details
 argocd app get mind-app
-
-# Force ArgoCD sync
-argocd app sync mind-app
-
-# Self-healing test (ArgoCD will restore within ~90 seconds)
-kubectl scale deployment mind-frontend -n mind --replicas=0
-
-# Watch pod recovery
-kubectl get pods -n mind -w
-
-# Restart a deployment
-kubectl rollout restart deployment/mind-backend -n mind
-
-# Check pod logs
-kubectl logs -n mind deployment/mind-backend --tail=50
-kubectl logs -n mind deployment/mind-frontend --tail=50
-kubectl logs -n mind deployment/postgres --tail=50
 ```
 
----
+### Secret Provisioning
 
-## Jenkins Pipeline
+The PostgreSQL secret is deliberately not committed to Git.
 
 ```bash
-# Trigger via Jenkins UI
-# Navigate to: http://depi-jenkins-depi.duckdns.org:8080
-# Click pipeline job → Build Now
-
-# Or trigger via Jenkins CLI (if configured)
-java -jar jenkins-cli.jar -s http://depi-jenkins-depi.duckdns.org:8080 build depi-mind-app-v2
+kubectl -n mind create secret generic postgres-secret \
+  --from-literal=POSTGRES_DB="${POSTGRES_DB}" \
+  --from-literal=POSTGRES_USER="${POSTGRES_USER}" \
+  --from-literal=POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" \
+  --dry-run=client -o yaml | kubectl apply -f -
 ```
 
----
+For a persistent production workflow, prefer External Secrets, Sealed Secrets, Vault, or a cloud secrets manager instead of imperative secret creation.
 
-## API Health Check
+## CI/CD Operations
+
+Jenkins, SonarQube, ArgoCD, Grafana, and log-viewer endpoints are intentionally not published.
+
+Use authenticated variables in your own environment:
 
 ```bash
-# Check API health
-curl http://depi-k3s-depi.duckdns.org:30080/api/health
+export JENKINS_URL="https://<authenticated-ci-endpoint>"
+export APP_URL="https://<authenticated-or-public-app-endpoint>"
 
-# Expected response:
-# {"message":"Notes API is running","status":"ok"}
+curl -fsS "${APP_URL}/api/health"
 ```
 
----
+Never place access tokens in shell history or documentation.
 
-## GitHub Pages Configuration
+## GitHub Pages
 
-In GitHub repository settings:
-- Settings → Pages → Source → **GitHub Actions**
+Public documentation:
+- https://fadyy2k.github.io/depi-mind-app-v2/
+- https://fadyy2k.github.io/depi-mind-app-v2/showcase/
 
-The workflow file: `.github/workflows/deploy-pages-combined.yml`
+Repository settings should use **GitHub Actions** as the Pages source.
 
----
+## DNS / Host Updates
 
-## DuckDNS Update (after EC2 IP change)
+Do not publish DNS update tokens or operational hostnames. Store the DNS token in a secrets manager and inject it at runtime.
 
-If EC2 instance is stopped/started and the IP changes:
+Example pattern:
 
 ```bash
-# Update DuckDNS for EC2 #1
-curl "https://www.duckdns.org/update?domains=depi-jenkins-depi&token=YOUR_TOKEN&ip=NEW_EC2_1_IP"
-
-# Update DuckDNS for EC2 #2
-curl "https://www.duckdns.org/update?domains=depi-k3s-depi&token=YOUR_TOKEN&ip=NEW_EC2_2_IP"
+curl "https://www.duckdns.org/update?domains=${LAB_DOMAIN}&token=${DUCKDNS_TOKEN}&ip=${NEW_PUBLIC_IP}"
 ```
 
-Replace `YOUR_TOKEN` with your DuckDNS token and `NEW_EC2_X_IP` with the new public IP from the AWS console.
+The values above must come from protected environment variables or a secret store.

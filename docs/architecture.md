@@ -1,3 +1,5 @@
+> 🔐 Public documentation: operational endpoints and credentials are sanitized. Use authenticated values supplied out-of-band for a live environment.
+
 # Architecture
 
 This page explains the full infrastructure design: the two AWS EC2 servers, how they interconnect, and the role of every component.
@@ -14,7 +16,7 @@ flowchart TB
         REPO[depi-mind-app-v2\nSource Code + K8s Manifests]
     end
 
-    subgraph EC1["🖥️ EC2 #1 — CI/CD Server\ndepi-jenkins-depi.duckdns.org"]
+    subgraph EC1["🖥️ EC2 #1 — CI/CD Server\nci-lab.internal.example"]
         JK[Jenkins :8080\nCI/CD Orchestrator]
         GL[Gitleaks\nSecret Scanner]
         SQ[SonarQube :9000\nCode Quality]
@@ -27,7 +29,7 @@ flowchart TB
         IMG_FE[fadyy2k/mind-frontend]
     end
 
-    subgraph EC2["🖥️ EC2 #2 — Kubernetes Server\ndepi-k3s-depi.duckdns.org"]
+    subgraph EC2["🖥️ EC2 #2 — Kubernetes Server\nk8s-lab.internal.example"]
         AR[ArgoCD :32000\nGitOps Controller]
         subgraph K3["K3s Cluster — namespace: mind"]
             FE[Frontend Pod\nReact/Nginx :30080]
@@ -92,7 +94,7 @@ sequenceDiagram
 
 ## EC2 #1 — CI/CD Server
 
-**Hostname:** `depi-jenkins-depi.duckdns.org`
+**Hostname:** `ci-lab.internal.example`
 **Role:** All CI/CD and security scanning workloads.
 
 ### Services Running
@@ -120,7 +122,7 @@ sequenceDiagram
 
 ## EC2 #2 — Kubernetes / GitOps Server
 
-**Hostname:** `depi-k3s-depi.duckdns.org`
+**Hostname:** `k8s-lab.internal.example`
 **Role:** Container runtime, GitOps controller, and public app hosting.
 
 ### Services Running
@@ -148,8 +150,8 @@ Both EC2 instances use **DuckDNS** for stable, human-readable hostnames that map
 
 | Hostname | Resolves To | Used For |
 |---|---|---|
-| `depi-jenkins-depi.duckdns.org` | EC2 #1 Public IP | Jenkins (8080), SonarQube (9000) |
-| `depi-k3s-depi.duckdns.org` | EC2 #2 Public IP | MIND App (30080), ArgoCD (32000) |
+| `ci-lab.internal.example` | EC2 #1 Public IP | Jenkins (8080), SonarQube (9000) |
+| `k8s-lab.internal.example` | EC2 #2 Public IP | MIND App (30080), ArgoCD (32000) |
 
 ---
 

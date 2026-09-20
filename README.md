@@ -2,9 +2,9 @@
 
 <div align="center">
 
-[![Pipeline](https://img.shields.io/badge/CI%2FCD-Jenkins-D24939?style=for-the-badge&logo=jenkins)](http://depi-jenkins-depi.duckdns.org:8080)
-[![K8s](https://img.shields.io/badge/Runtime-K3s%20Kubernetes-326CE5?style=for-the-badge&logo=kubernetes)](http://depi-k3s-depi.duckdns.org:30080)
-[![GitOps](https://img.shields.io/badge/GitOps-ArgoCD-EF7B4D?style=for-the-badge&logo=argo)](http://depi-k3s-depi.duckdns.org:32000)
+[![Pipeline](https://img.shields.io/badge/CI%2FCD-Jenkins-D24939?style=for-the-badge&logo=jenkins)](https://fadyy2k.github.io/depi-mind-app-v2/cicd/)
+[![K8s](https://img.shields.io/badge/Runtime-K3s%20Kubernetes-326CE5?style=for-the-badge&logo=kubernetes)](https://fadyy2k.github.io/depi-mind-app-v2/showcase/)
+[![GitOps](https://img.shields.io/badge/GitOps-ArgoCD-EF7B4D?style=for-the-badge&logo=argo)](https://fadyy2k.github.io/depi-mind-app-v2/argocd/)
 [![Docs](https://img.shields.io/badge/Docs-MkDocs-526CFE?style=for-the-badge&logo=material-for-mkdocs)](https://fadyy2k.github.io/depi-mind-app-v2/)
 [![Showcase](https://img.shields.io/badge/Showcase-Live-00C9A7?style=for-the-badge)](https://fadyy2k.github.io/depi-mind-app-v2/showcase/)
 
@@ -14,21 +14,16 @@
 
 ---
 
-## Live Links
+## Public Documentation & Artifacts
 
-| Resource | URL | Access |
-|---|---|---|
-| MIND Notes App | http://depi-k3s-depi.duckdns.org:30080 | `demo@example.com` / `demo123456` |
-| API Health | http://depi-k3s-depi.duckdns.org:30080/api/health | Public |
-| Jenkins CI/CD | http://depi-jenkins-depi.duckdns.org:8080 | No login required |
-| ArgoCD GitOps | http://depi-k3s-depi.duckdns.org:32000 | Demo credentials — live demo only |
-| SonarQube | http://depi-jenkins-depi.duckdns.org:9000 | Demo credentials — live demo only |
-| Grafana Monitoring | http://depi-k3s-depi.duckdns.org:30300 | Demo credentials — live demo only |
-| Dozzle Live Logs | http://depi-k3s-depi.duckdns.org:30301 | Demo access — live Kubernetes logs |
-| DockerHub Backend | https://hub.docker.com/r/fadyy2k/mind-backend | Public |
-| DockerHub Frontend | https://hub.docker.com/r/fadyy2k/mind-frontend | Public |
-| MkDocs Documentation | https://fadyy2k.github.io/depi-mind-app-v2/ | Public |
-| Visual Showcase | https://fadyy2k.github.io/depi-mind-app-v2/showcase/ | Public |
+> 🔐 **Security note:** operational dashboards, CI/CD control planes, cluster endpoints, IP addresses, and demo credentials are intentionally not published. The public material focuses on architecture, code, pipeline design, and evidence.
+
+| Resource | Public link |
+|---|---|
+| MkDocs Documentation | https://fadyy2k.github.io/depi-mind-app-v2/ |
+| Visual Showcase | https://fadyy2k.github.io/depi-mind-app-v2/showcase/ |
+| DockerHub Backend | https://hub.docker.com/r/fadyy2k/mind-backend |
+| DockerHub Frontend | https://hub.docker.com/r/fadyy2k/mind-frontend |
 
 ---
 
@@ -56,7 +51,7 @@ Developer (git push)
     GitHub Repository
         │
         ▼
-    Jenkins (EC2 #1 — depi-jenkins-depi.duckdns.org)
+    Jenkins (EC2 #1 — ci-lab.internal.example)
         │
         ├── Gitleaks Secret Scan     → No leaks found ✓
         ├── SonarQube Code Analysis  → Quality gate passed ✓
@@ -70,7 +65,7 @@ Developer (git push)
               DockerHub Registry
                     │
                     ▼
-              ArgoCD (EC2 #2 — depi-k3s-depi.duckdns.org)
+              ArgoCD (EC2 #2 — k8s-lab.internal.example)
                     │
                     ▼
               K3s Kubernetes Cluster
@@ -87,7 +82,7 @@ Developer (git push)
 Two AWS EC2 servers power this project:
 
 ### EC2 #1 — CI/CD Server (`depi-jenkins-server`)
-**Hostname:** `depi-jenkins-depi.duckdns.org`
+**Hostname:** `ci-lab.internal.example`
 
 | Service | Port | Purpose |
 |---|---|---|
@@ -98,7 +93,7 @@ Two AWS EC2 servers power this project:
 | Trivy | — | Vulnerability scanning |
 
 ### EC2 #2 — Kubernetes / GitOps Server (`depi-k3s-server`)
-**Hostname:** `depi-k3s-depi.duckdns.org`
+**Hostname:** `k8s-lab.internal.example`
 
 | Service | Port | Purpose |
 |---|---|---|
@@ -168,7 +163,7 @@ depi-mind-app-v2/
 
 ## Security
 
-> **Important:** This repository does not contain any real passwords, tokens, SSH keys, cloud credentials, or secrets.
+> **Important:** operational endpoints and credentials are intentionally excluded from the public documentation. Example values are non-production placeholders only.
 
 All sensitive values (DockerHub token, SonarQube token, GitHub token) are stored exclusively as **Jenkins credentials** and are never written to source code, Dockerfiles, YAML manifests, or documentation.
 

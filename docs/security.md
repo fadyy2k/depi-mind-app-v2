@@ -94,8 +94,8 @@ The scanner uploads results to the SonarQube server at `http://localhost:9000` o
 
 | Field | Value |
 |---|---|
-| URL | [http://depi-jenkins-depi.duckdns.org:9000](http://depi-jenkins-depi.duckdns.org:9000) |
-| Credentials | Demo credentials — live demo only |
+| URL | [https://fadyy2k.github.io/depi-mind-app-v2/security/](https://fadyy2k.github.io/depi-mind-app-v2/security/) |
+| Credentials | Authentication required |
 | Project key | `depi-mind-app-v2` |
 | Project name | `DEPI MIND App` |
 
@@ -180,7 +180,7 @@ Also consider:
     - AWS access keys or secret keys
     - Any cloud provider credentials
 
-All sensitive values are stored **exclusively** in Jenkins Credentials Manager, encrypted at rest, and injected into the pipeline at runtime via `withCredentials()` blocks.
+Pipeline credentials are injected at runtime from the CI credential store. Public documentation intentionally omits live endpoints and credential values.
 
 ### Jenkins Credentials Architecture
 

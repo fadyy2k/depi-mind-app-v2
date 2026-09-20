@@ -4,7 +4,6 @@ import (
 	"log"
 	"notes-app/internal/db"
 	"notes-app/internal/handlers"
-	"notes-app/internal/models"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -20,8 +19,6 @@ func main() {
 	// Initialize database
 	db.Init()
 
-	// Seed database with dummy account
-	seedDatabase()
 
 	// Create Gin router
 	r := gin.Default()
@@ -80,25 +77,5 @@ func main() {
 
 	log.Printf("Server starting on port %s", port)
 	log.Fatal(r.Run(":" + port))
-}
-
-// seedDatabase creates a dummy account for testing
-func seedDatabase() {
-	// Check if dummy user already exists
-	var existingUser models.User
-	result := db.GetDB().Where("email = ?", "demo@example.com").First(&existingUser)
-	
-	// If user doesn't exist, create it
-	if result.Error != nil {
-		hashedPassword, _ := models.HashPassword("demo123456")
-		dummyUser := models.User{
-			Email:    "demo@example.com",
-			Password: hashedPassword,
-		}
-		db.GetDB().Create(&dummyUser)
-		log.Println("Dummy user created: demo@example.com / demo123456")
-	} else {
-		log.Println("Dummy user already exists: demo@example.com / demo123456")
-	}
 }
 

@@ -4,17 +4,6 @@ metadata:
   name: mind
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secret
-  namespace: mind
-type: Opaque
-stringData:
-  POSTGRES_DB: notes_app
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: password
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
@@ -193,4 +182,4 @@ spec:
   ports:
     - port: 80
       targetPort: 80
-      nodePort: 30080
+      # NodePort intentionally omitted; let Kubernetes allocate or expose via authenticated ingress

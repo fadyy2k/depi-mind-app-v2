@@ -1,3 +1,5 @@
+> 🔐 Public documentation: operational endpoints and credentials are sanitized. Use authenticated values supplied out-of-band for a live environment.
+
 # CI/CD Pipeline
 
 The Jenkins pipeline automates every step from source code to a pushed, scanned, production-ready Docker image. This page explains each stage, what it does, and why it matters.
@@ -30,7 +32,7 @@ flowchart LR
 
 | Item | Value |
 |---|---|
-| Jenkins URL | [http://depi-jenkins-depi.duckdns.org:8080](http://depi-jenkins-depi.duckdns.org:8080) |
+| Jenkins URL | [http://ci-lab.internal.example:8080](http://ci-lab.internal.example:8080) |
 | Login | No login required (read-only public view) |
 | Pipeline job | Visible in the Jenkins dashboard |
 

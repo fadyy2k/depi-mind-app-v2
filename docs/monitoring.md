@@ -1,3 +1,5 @@
+> 🔐 Public documentation: operational endpoints and credentials are sanitized. Use authenticated values supplied out-of-band for a live environment.
+
 # Monitoring — Prometheus and Grafana
 
 This page documents the observability layer added to the DEPI DevSecOps Project — MIND Notes App.
@@ -48,9 +50,9 @@ namespace: argocd   # ArgoCD GitOps controller
 
 | Resource | URL |
 |---|---|
-| Grafana | `http://depi-k3s-depi.duckdns.org:30300` |
-| MIND App Monitoring Dashboard | `http://depi-k3s-depi.duckdns.org:30300/d/mind-app-monitoring/mind-app-monitoring` |
-| Dozzle Live Logs | `http://depi-k3s-depi.duckdns.org:30301` |
+| Grafana | `http://k8s-lab.internal.example:30300` |
+| MIND App Monitoring Dashboard | `http://k8s-lab.internal.example:30300/d/mind-app-monitoring/mind-app-monitoring` |
+| Dozzle Live Logs | `http://k8s-lab.internal.example:30301` |
 
 !!! warning "Security"
     Grafana is exposed using NodePort `30300` for demo purposes.
