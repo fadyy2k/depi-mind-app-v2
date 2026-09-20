@@ -32,7 +32,7 @@ cluster_log_types         = ["api", "audit", "authenticator", "controllerManager
 # ============================================================================
 # SECURITY CONFIGURATION
 # ============================================================================
-allowed_ssh_ips = ["0.0.0.0/0"]  # Replace with your IP for production
+allowed_ssh_ips = ["203.0.113.10/32"]  # Example only; replace with your trusted admin CIDR
 
 # ============================================================================
 # IAM ACCESS CONFIGURATION - Grant Console Access
@@ -40,9 +40,9 @@ allowed_ssh_ips = ["0.0.0.0/0"]  # Replace with your IP for production
 # Add your IAM user ARN here (get it with: aws sts get-caller-identity)
 additional_iam_users = [
   {
-    userarn  = "arn:aws:iam::435976457077:user/eks-cli"  # REPLACE THIS
+    userarn  = "arn:aws:iam::123456789012:user/eks-cli"  # Example placeholder; replace locally
     username = "eks-cli"
-    groups   = ["system:masters"]
+    groups   = ["viewers"]
   }
 ]
 
