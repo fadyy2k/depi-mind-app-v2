@@ -279,6 +279,11 @@ docker compose -f docker-compose.dev.yml up
 
 ---
 
+
+## Dependency security baseline
+
+The public reference is kept on a current dependency baseline: Go vulnerability reachability is checked with `govulncheck`, JavaScript package trees are expected to pass `npm audit`, CodeQL scans Go/JavaScript, and Dependabot tracks future updates. Security refreshes are validated with full frontend/docs/showcase builds before merge.
+
 ## Production Improvements
 
 For a production-grade deployment, the following enhancements are recommended:

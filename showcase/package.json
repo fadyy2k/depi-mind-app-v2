@@ -12,5 +12,6 @@
     "lucide-react": "latest",
     "recharts": "latest"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "type": "module"
 }
