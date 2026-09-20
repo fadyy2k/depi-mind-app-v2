@@ -1,3 +1,5 @@
+> 🔐 Public version: infrastructure identifiers, addresses, and credentials are sanitized. Operational access is shared only through authenticated channels when required.
+
 # DEPI DevSecOps Project - MIND Notes App
 
 ## Overview
@@ -29,14 +31,14 @@ GitHub -> Jenkins -> Docker Build -> Trivy Scan -> DockerHub -> ArgoCD -> K3s Ku
 Jenkins server:
 
 - Name: depi-jenkins-server
-- Public IP: 18.201.218.207
-- Jenkins URL: http://depi-jenkins-depi.duckdns.org:8080
+- Public IP: 192.0.2.10
+- Jenkins URL: https://fadyy2k.github.io/depi-mind-app-v2/cicd/
 
 K3s server:
 
 - Name: depi-k3s-server
-- Public IP: 52.19.23.63
-- Private IP: 172.31.46.156
+- Public IP: 198.51.100.20
+- Private IP: 10.0.20.10
 - Kubernetes: K3s v1.35.4+k3s1
 
 ## GitHub Repository
@@ -103,22 +105,22 @@ Main resources:
 
 Application URL:
 
-- http://depi-k3s-depi.duckdns.org:30080
+- https://fadyy2k.github.io/depi-mind-app-v2/showcase/
 
 API health URL:
 
-- http://depi-k3s-depi.duckdns.org:30080/api/health
+- https://fadyy2k.github.io/depi-mind-app-v2/operations/
 
 Demo login:
 
-- Email: demo@example.com
-- Password: demo123456
+- Email: <demo-user>
+- Password: <configured-out-of-band>
 
 ## ArgoCD GitOps
 
 ArgoCD URL:
 
-- http://depi-k3s-depi.duckdns.org:32000
+- https://fadyy2k.github.io/depi-mind-app-v2/argocd/
 
 ArgoCD application:
 
