@@ -7,6 +7,8 @@
 [![GitOps](https://img.shields.io/badge/GitOps-ArgoCD-EF7B4D?style=for-the-badge&logo=argo)](https://fadyy2k.github.io/depi-mind-app-v2/argocd/)
 [![Docs](https://img.shields.io/badge/Docs-MkDocs-526CFE?style=for-the-badge&logo=material-for-mkdocs)](https://fadyy2k.github.io/depi-mind-app-v2/)
 [![Showcase](https://img.shields.io/badge/Showcase-Live-00C9A7?style=for-the-badge)](https://fadyy2k.github.io/depi-mind-app-v2/showcase/)
+[![CodeQL](https://github.com/fadyy2k/depi-mind-app-v2/actions/workflows/codeql.yml/badge.svg)](https://github.com/fadyy2k/depi-mind-app-v2/actions/workflows/codeql.yml)
+[![Docs Deploy](https://github.com/fadyy2k/depi-mind-app-v2/actions/workflows/deploy-pages-combined.yml/badge.svg)](https://github.com/fadyy2k/depi-mind-app-v2/actions/workflows/deploy-pages-combined.yml)
 
 **A production-grade DevSecOps pipeline: from source code commit to live Kubernetes deployment — with security scanning, GitOps, and self-healing automation at every step.**
 
